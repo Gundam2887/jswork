@@ -3,13 +3,19 @@
         <meat charset = "UTF-8">
            <title>网上冲浪聊天室</title> 
            <script>
-             
+              function say(){
+                  var gg=prompt("请输入。")
+                  console.log("gg说:"+gg);
+              }
+              function say2(){
+                  var mm=prompt("请输入。")
+                  console.log("mm说:"+mm);  
+              }
            </script>
     </head>
 
     <body>
-        <input type = "button"  value = "gg" onclick = "prompt ('gg说')">
-        <input type = "button"  value = "mm" onclick = "prompt ('mm说')">
-        console.log()
+       <button onclick="say()">gg</button>
+       <button onclick="say2()">mm</button>
     </body>
 </html>
