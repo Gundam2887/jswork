@@ -1,7 +1,7 @@
 str1 ='<table border="1">'
-for(let i=1;i<10;++i){
+for(let i=9;i>0;--i){
     str1 +='<tr>'
-    for(var j=1 ;j<=i;++j){
+    for(var j=9 ;j>0;--j){
         //;拼接单元格
         str1 += '<td>&nbsp;</td>'
     }
