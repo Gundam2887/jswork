@@ -12,7 +12,7 @@ function bubbleSort(str){
 function insertSort(str){
     let arr = str.split(',')
     for (let i=1;i<arr.length;i++){
-        for (let i= 1;j>0;j--){
+        for (let j= i;j>0;j--){
             if (arr[j-1]>arr[j]){
             [arr[j-1],arr[j]]=[arr[j],arr[j-1]]
             }
