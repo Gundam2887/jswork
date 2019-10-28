@@ -1,5 +1,5 @@
-let collegesSelect = ['电子与通信学院', '先进制造学院', '电气技术学院', '汽车学院', '计算机与设计学院', '外语商务学院', '经济贸易学院', '物流学院', '马克思主义学院']
-let majorsSelect = [
+let collegesSelectArr = ['电子与通信学院', '先进制造学院', '电气技术学院', '汽车学院', '计算机与设计学院', '外语商务学院', '经济贸易学院', '物流学院', '马克思主义学院']
+let majorsSelectArr = [
     ['电子', '电信', '通信', '嵌入', '物联'],
     ['数控', '模具', '机设', '机自'],
     ['机电', '电气', '建电', '建智', '空调', '光电', '机器人'],
@@ -10,7 +10,7 @@ let majorsSelect = [
     ['物流', '物技', '工企', '营销', '报关', '连锁'],
     ['社工']
 ]
-let classesSelect = [
+let classesSelectArr = [
     [
         ["电子1801", "电子1802"],
         ["电信1803", "电信1804"],
@@ -73,4 +73,36 @@ let classesSelect = [
         ['社工1801']
     ]
 ]
-/*https://blog.csdn.net/gelinwangzi_juge/article/details/80966230*/
+
+function createOption(obj,data) {
+    for (var i in data){
+        var op = new Option(data[i],i);
+        obj.options.add(op);
+    }
+}
+
+var collegesSelect=document.getElementById('collegesSelect');
+createOption(collegesSelect,collegesSelectArr);
+
+var majorsSelect = document.getElementById('majorsSelect');
+collegesSelect.onchange=function(){
+    majorsSelect.options.length = 0;
+    createOption(majorsSelect,majorsSelectArr[collegesSelect.value]);
+};
+
+var classesSelect = document.getElementById('classesSelect');
+majorsSelect.onchange=function(){
+    classesSelect.options.length=0;
+    createOption(classesSelect,classesSelectArr[collegesSelect.value][majorsSelect.value])
+};
+
+collegesSelect.onchange = function(){
+majorsSelect.options.length=0;
+createOption(majorsSelect,majorsSelectArr[collegesSelect.value]);
+
+if (collegesSelect.value>=0){
+    majorsSelect.onchange();
+}else{
+    classesSelect.options.length=0;
+}
+};
