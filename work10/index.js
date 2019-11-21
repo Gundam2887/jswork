@@ -35,4 +35,4 @@ function stat(){
     },{});
 
     document.getElementById('result').innerText = JSON.stringify(num)
-}
+}      
