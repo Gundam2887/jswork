@@ -61,7 +61,7 @@
         del:function(item){
             for(let i in this.items){
                 if(this.items[i] === item){
-                    delete this.items[i];
+                    delete this.items[i] ;
                 }
             }
         },
