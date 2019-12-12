@@ -5,7 +5,7 @@
         for(let i in defCart){
             cart.add(defCart[i]);
         }
-        cart.updateTotal();
+        cart.updateTotal(); 
     };
     function Cart(obj){
         this.items = [];
