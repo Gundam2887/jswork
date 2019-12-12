@@ -32,7 +32,7 @@
             let cart = this;
             item.check.onclick = function(){
                 cart.updateTotal();
-            };
+            };  
             item.add.onclick = function(){
                 item.num.textContent = ++item.data.num;
                 item.updateSubtotal()
