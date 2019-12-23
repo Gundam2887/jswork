@@ -1,6 +1,6 @@
 (function(){
     function PageList(options){
-        for (var i in oprions){
+        for (var i in options){
             this[i]= options[i];
         }
         var obj = this;
@@ -9,11 +9,11 @@
             obj.onChange();
         };
         this.prev.onclick=function(){
-            obj.page = (obj.page>1)?(ogj.page-1):1;
+            obj.page = (obj.page>1)?(obj.page-1):1;
             obj.onChange();
         ;}
         this.next.onclick=function(){
-            obj.page=(pbj.page>=obj.maxPage)?obj.maxPage:(obj.page+1);
+            obj.page=(obj.page>=obj.maxPage)?obj.maxPage:(obj.page+1);
             obj.onChange();
         };
         this.last.onclick=function(){
@@ -37,13 +37,13 @@
         xhr.onreadystatechange = function(){
             if(xhr.readyState===4){
                 if(xhr.status< 200||xhr.status>=300&&xhr.status !==304){
-                    alert('土豆异常');
+                    alert('服务器异常');
                     return;
                 }
                 try{
                     var obj = JSON.parse(xhr.responseText);
                 }catch (e){
-                    alert('解析土豆返回信息失败');
+                    alert('解析服务器返回信息失败');
                     return;
                 }
                 complete(obj);
@@ -58,7 +58,7 @@
         for (var i in data) {
             html += '<ul><li>id:'+data[i].id+' 用户名 '+data[i].user + ' 发表时间：'
             html += data[i].time + '</li>';
-            html += '<li>'+ data[i].content + '</li><ul>';
+            html += '<li>'+ data[i].content + '</li></ul>';
         }
         this.obj.innerHTML = html;
     };
@@ -96,13 +96,13 @@
         },
         getPage:function(){
             var page = parseInt(this.find('page'));
-            return(inNaN(page)||(page<1)) ? 1 :page;
+            return(isNaN(page)||(page<1)) ? 1 :page;
         }
     };
-    var Comment = new Comment(document.getElementById('comment'));
-    var ProgressBar;
-    var ProgressContainer  = document.getElementById('progress');
-    var PageList = new PageList({
+    var comment = new Comment(document.getElementById('comment'));
+    var progressBar;
+    var progressContainer  = document.getElementById('progress');
+    var pageList = new PageList({
         page:QueryString.getPage(),
         maxPage: 1,
         first:document.getElementById('page_first'),
@@ -111,12 +111,12 @@
         last:document.getElementById('page_last'),
         pageNum:document.getElementById('page_num'),
         onChange:function(){
-            Comment.ajax('http://139.9.81.203:8090/ajax?page=' + this.page,function(){
-                ProgressBar = new ProgressBar(ProgressContainer);
-                ProgressBar.show();
+            comment.ajax('http://139.9.81.203:8090/ajax?page=' + this.page,function(){
+                progressBar = new ProgressBar(progressContainer);
+                progressBar.show();
             },function(obj){
-                PageList.maxPage=obj.maxPage;
-                paeList.ipdateStatus();
+                pageList.maxPage=obj.maxPage;
+                pageList.updateStatus();
                 comment.create(obj.data);
                 QueryString.set('page=' + pageList.page);
                 progressBar.complete();
